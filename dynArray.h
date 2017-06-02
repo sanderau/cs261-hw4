@@ -8,6 +8,7 @@
 #ifndef DYNAMIC_ARRAY_INCLUDED
 #define DYNAMIC_ARRAY_INCLUDED 1
 
+#include <stdio.h>
 #include "type.h"
 
 struct DynArr
@@ -43,4 +44,6 @@ TYPE getMinHeap(DynArr *heap);
 void addHeap(DynArr *heap, TYPE node);
 void removeMinHeap(DynArr *heap);
 void sortHeap(DynArr *heap);
+int _minIdx(struct DynArr *da, int i, int j);
+void _swap(struct DynArr *d, int i, int j);
 #endif

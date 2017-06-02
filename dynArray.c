@@ -263,9 +263,19 @@ int _smallerIndexHeap(DynArr *heap, int i, int j)
 */
 TYPE getMinHeap(DynArr *heap)
 {
-  	/* FIXME */
   	TYPE temp;
-  	return temp;
+	if(heap->size > 0) 
+	{
+		temp = heap->data[0];
+  		return temp;
+	}
+
+	else
+	{
+		printf("The heap is empty\n");
+		temp.priority = -1;
+		return temp;
+	}
 }
 
 /*	Add a node to the heap
@@ -307,10 +317,26 @@ void addHeap(DynArr *heap, TYPE node)
 void _adjustHeap(DynArr *heap, int max, int pos)
 {
 	assert(heap);
-	int left = pos * 2 + 1;
-	int right = pos * 2 + 2;
-	if(right < max)
+	int leftIdx = pos*2+1;
+	int rightIdx = pos*2+2;
+	
+	if(rightIdx <= max)
 	{
+		int smallIdx = _minIdx(heap, rightIdx, leftIdx);
+		if(heap->data[smallIdx].priority < heap->data[pos].priority)
+		{
+			_swap(heap, pos, smallIdx);
+			_adjustHeap(heap,max,smallIdx);
+		}
+	}
+
+	else if(leftIdx <= max)
+	{
+		if(heap->data[leftIdx].priority < heap->data[pos].priority)
+		{
+			_swap(heap, pos, leftIdx);
+			_adjustHeap(heap,max,leftIdx);
+		}
 
 	}
 }
@@ -323,7 +349,14 @@ void _adjustHeap(DynArr *heap, int max, int pos)
 */
 void removeMinHeap(DynArr *heap)
 {
-  	/* FIXME */
+  	assert(heap);
+	if(heap->size <= 0) return;
+	
+	int last = heap->size-1;
+	if(last!=0) heap->data[0] = heap->data[last];
+	
+	heap->size--;
+	_adjustHeap(heap, last-1, 0);
 }
 
 
@@ -349,5 +382,19 @@ void _buildHeap(DynArr *heap)
 
 void sortHeap(DynArr *heap)
 {
-	/*FIXME*/
+	
 }
+
+int _minIdx(struct DynArr *da, int i, int j)
+{
+	if(da->data[i].priority < da->data[j].priority)
+		return i;
+	return j;
+}
+
+void _swap(struct DynArr *da, int i, int j)
+{
+	TYPE temp = da->data[i];
+	da->data[i] = da->data[j];
+	da->data[j] = temp;
+}	

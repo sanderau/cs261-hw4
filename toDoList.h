@@ -2,9 +2,9 @@
 #define __TODOLIST_H
 
 #include <stdio.h>
+#include <assert.h>
 #include "dynArray.h"
 #include "type.h"
-
 
 TYPE createTask (int priority, char *desc);
 

@@ -37,7 +37,17 @@ TYPE createTask (int priority, char *desc)
 */
 void saveList(DynArr *heap, FILE *filePtr)
 {
-  	/* FIX ME */
+	assert(heap);
+	assert(filePtr != NULL);
+	
+	int i;
+  	for(i = 0; i < heap->size; i++)
+	{
+		fprintf(filePtr, "%d", heap->data[i].priority);
+		fputs("\t", filePtr);
+		fputs(heap->data[i].description, filePtr);
+		fputs("\n", filePtr);
+	}
 }
 
 /*  Load the list from a file
@@ -50,7 +60,10 @@ void saveList(DynArr *heap, FILE *filePtr)
 */
 void loadList(DynArr *heap, FILE *filePtr)
 {
-  	/* FIX ME */
+  	assert(heap);
+	assert(filePtr != NULL);
+
+	int i;
 }
 
 /*  Print the list

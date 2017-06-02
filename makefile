@@ -12,7 +12,7 @@ prog: dynArray.o toDoList.o main.c
 clean:
 	rm dynArray.o	
 	rm toDoList.o
-	rm prog
+	rm heap.txt
 
 cleanall: clean
 	rm prog
