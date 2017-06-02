@@ -1,4 +1,10 @@
 /* 	dynArray.h : Dynamic Array implementation. */
+
+#ifndef LT
+#define LT(A, B) ((A) < (B))
+#endif
+	
+
 #ifndef DYNAMIC_ARRAY_INCLUDED
 #define DYNAMIC_ARRAY_INCLUDED 1
 

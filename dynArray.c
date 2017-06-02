@@ -277,7 +277,23 @@ TYPE getMinHeap(DynArr *heap)
 */
 void addHeap(DynArr *heap, TYPE node)
 {
-  	/* FIXME */
+	assert(heap);
+	int pos = heap->size;
+	int pidx = (pos-1)/2;
+	TYPE parentVal;
+
+	if(pos >= heap->capacity) _dynArrSetCapacity(heap, 2 * heap->capacity);
+	if(pos > 0)parentVal = heap->data[pidx];
+	while(pos > 0 && node.priority < parentVal.priority)
+	{
+		heap->data[pos] = parentVal;
+		pos = pidx;
+		pidx = (pos - 1) / 2;
+		if ( pos > 0 ) parentVal = heap->data[pidx];
+	}
+	
+	heap->data[pos] = node;
+	heap->size++;
 }
 
 /*	Adjust heap to maintain heap property
@@ -290,7 +306,13 @@ void addHeap(DynArr *heap, TYPE node)
 */
 void _adjustHeap(DynArr *heap, int max, int pos)
 {
-  	/* FIXME */
+	assert(heap);
+	int left = pos * 2 + 1;
+	int right = pos * 2 + 2;
+	if(right < max)
+	{
+
+	}
 }
 
 /*	Remove the first node, which has the min priority, from the heap

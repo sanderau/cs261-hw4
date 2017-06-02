@@ -56,13 +56,22 @@ void loadList(DynArr *heap, FILE *filePtr)
 /*  Print the list
 
     param:  heap    pointer to the list
-    pre:    the list is not empty
+    pre:    the list is not empty, and is in order
     post:   The tasks from the list are printed out in priority order.
 			The tasks are not removed from the list.
 */
 void printList(DynArr *heap)
 {
-  	/* FIX ME  */
+	int i;
+	for(i = 0; i < heap->size; i++)
+	{
+		printType(heap->data[i]);
+	}
+}
+
+void printType(TYPE t)
+{
+	printf("Priority %d: %s\n", t.priority, t.description);
 }
 
 /*  Compare two tasks by priority
