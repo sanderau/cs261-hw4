@@ -41,6 +41,7 @@ void saveList(DynArr *heap, FILE *filePtr)
 	assert(filePtr != NULL);
 	
 	int i;
+	fprintf(filePtr, "%d\n", heap->size);
   	for(i = 0; i < heap->size; i++)
 	{
 		fprintf(filePtr, "%d", heap->data[i].priority);
@@ -63,7 +64,18 @@ void loadList(DynArr *heap, FILE *filePtr)
   	assert(heap);
 	assert(filePtr != NULL);
 
-	int i;
+	int i, num;
+	fscanf(filePtr, "%d", &num);
+	
+	for(i = 0; i < num; i++)
+	{  
+		struct Task temp;
+		fscanf(filePtr, "%d", &temp.priority);
+		fscanf(filePtr, "\t%[^\n]", temp.description);
+
+		addHeap(heap, temp);
+	}
+	
 }
 
 /*  Print the list
@@ -75,6 +87,8 @@ void loadList(DynArr *heap, FILE *filePtr)
 */
 void printList(DynArr *heap)
 {
+/*	sortHeap(heap);	*/
+
 	int i;
 	for(i = 0; i < heap->size; i++)
 	{

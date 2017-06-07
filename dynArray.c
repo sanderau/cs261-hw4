@@ -369,8 +369,13 @@ void removeMinHeap(DynArr *heap)
 
 void _buildHeap(DynArr *heap)
 {
-	/* FIXME */
-	
+	 /*I am not super clear on what you want me to program here so I am going to take my best guess */
+	assert(heap->size);
+	int maxIdx = heap->size;
+	int i;
+
+	for(i = maxIdx / 2 - 1; i >= 0; i--)
+		_adjustHeap(heap, maxIdx, i);
 }
 /* 
 	In-place sort of the heap 
@@ -379,10 +384,31 @@ void _buildHeap(DynArr *heap)
 	pre: heap is not empty
 	post: the dynArr is in reverse sorted order
  */
+void swapVals(DynArr *heap, int i, int j)
+{
+	struct Task temp;
+	temp = heap->data[i];
+	heap->data[i] = heap->data[j];
+	heap->data[j] = temp;
+}
 
 void sortHeap(DynArr *heap)
 {
-	
+	int swap = 1, i;
+
+	while(swap)
+	{
+		swap = 0;
+		
+		for(i = 0; i < heap->size; i++)
+		{
+			if(i+1 <= heap->size && heap->data[i].priority > heap->data[i+1].priority)
+			{
+				swap = 1;
+				swapVals(heap, i, i+1);
+			}
+		}
+	}
 }
 
 int _minIdx(struct DynArr *da, int i, int j)
